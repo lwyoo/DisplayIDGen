@@ -26,6 +26,8 @@
 #include <vector>
 #define DISP_ID_FIND "#define eDispId_"
 #define FIDL_ID_FIND "eDispId_RENAME_"
+#define GROUP_STR "/** Group"
+#define GROUP_STR_END " **/"
 using namespace std;
 // ./DisplayGen -c DispStaruc.cpp  eDispId.h .fidl
 
@@ -94,9 +96,36 @@ void search3(vector<string>& v, string& word)
     }
 }
 
-void search3_1(vector<string>& v, string& word, map<string, string>& out)
+void serarchGroup(vector<string>& v, map<int, string>& out)
 {
 
+    int tempGrouLevel = 0;
+    map<int, string> groupMap; // line, groupName
+    for (int i = 0; i < v.size(); i++) {
+        /////////////
+        /// group ///
+        /////////////
+        ///
+
+        string word = GROUP_STR;
+        int indexGroup = v[i].find(word);
+        if (indexGroup != -1) {
+            //            cout << "v[" << i << "] : " << v[i] << endl;
+            string tempStr = v[i].substr(word.length(), v[i].length() - word.length());
+
+            int endPos = tempStr.find(GROUP_STR_END);
+            string tempStr2 = tempStr.substr(0, endPos);
+            tempStr2.erase(remove(tempStr2.begin(), tempStr2.end(), ' '), tempStr2.end());
+            cout << "test2 :" << tempStr2 << endl;
+            out[i] = tempStr2;
+        }
+    }
+}
+
+void search3_1(vector<string>& v, string& word, map<string, string>& out)
+{
+    map<int, string> groupMap;
+    serarchGroup(v, groupMap);
     //    cout << "serch word [" << word << "] << endl";
     for (int i = 0; i < v.size(); i++) {
         int index = v[i].find(word);
@@ -156,12 +185,13 @@ void search5(vector<string>& v, string& endStr, string& word, vector<string>& ou
 {
 
     for (int i = 0; i < v.size(); i++) {
+
+        //////////////
+        ///  text  ///
+        //////////////
         int index = v[i].find(word);
         if (index != -1) {
-            //            cout << "find text : " << v[i];
-            //            string temp = v[i].substr(word.length(), v[i].length() - word.length());
             string temp = v[i].substr(index, v[i].length() - index + word.length());
-
             int endPos = temp.find(endStr);
             outV.push_back(temp.substr(0, endPos));
         }
@@ -346,9 +376,9 @@ int main(int argc, char* argv[])
 
     map<string, string>::iterator i;
 
-    for (i = mapHeaderID.begin(); i != mapHeaderID.end(); i++) {
-        cout << " key [" << i->first << "] value [" << i->second << "]" << endl;
-    }
+    //    for (i = mapHeaderID.begin(); i != mapHeaderID.end(); i++) {
+    //        cout << " key [" << i->first << "] value [" << i->second << "]" << endl;
+    //    }
     //    search3(readDataDisp, word);
 
     /////////////////////
@@ -377,7 +407,7 @@ int main(int argc, char* argv[])
 
     map<string, string>::iterator it;
 
-    for (it = mapFidlID.begin(); it != mapFidlID.end(); it++) {
-        cout << " key [" << it->first << "] value [" << it->second << "]" << endl;
-    }
+    //    for (it = mapFidlID.begin(); it != mapFidlID.end(); it++) {
+    //        cout << " key [" << it->first << "] value [" << it->second << "]" << endl;
+    //    }
 }
