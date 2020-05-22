@@ -116,7 +116,7 @@ void serarchGroup(vector<string>& v, map<int, string>& out)
             int endPos = tempStr.find(GROUP_STR_END);
             string tempStr2 = tempStr.substr(0, endPos);
             tempStr2.erase(remove(tempStr2.begin(), tempStr2.end(), ' '), tempStr2.end());
-            cout << "test2 :" << tempStr2 << endl;
+            cout << "line [" << i << "] value [" << tempStr2 << "] " << endl;
             out[i] = tempStr2;
         }
     }
@@ -148,6 +148,49 @@ void search3_1(vector<string>& v, string& word, map<string, string>& out)
     }
 }
 
+void search3_2(vector<string>& v, string& word, map<string, pair<string, string>>& out)
+{
+    map<int, string> groupMap;
+    serarchGroup(v, groupMap);
+    //    cout << "serch word [" << word << "] << endl";
+    for (int i = 0; i < v.size(); i++) {
+        int index = v[i].find(word);
+        if (index != -1) {
+            string temp = v[i].substr(word.length(), v[i].length() - word.length());
+            int endPos = temp.find("(");
+
+            //            string valueStr = v[i].substr(index + 8, v[i].length() - word.length());
+
+            int valueIndex = v[i].find("eDispId_");
+            string valueStr = v[i].substr(valueIndex, v[i].length() - word.length());
+            valueStr.erase(remove(valueStr.begin(), valueStr.end(), ' '), valueStr.end());
+
+            string keyStr = temp.substr(0, endPos);
+            keyStr.erase(remove(keyStr.begin(), keyStr.end(), ' '), keyStr.end());
+
+            //            cout << "keyStr : " << keyStr << "valueStr : " << valueStr << endl;
+
+            map<int, string>::iterator it;
+
+            pair<string, string> pairData; //IVIS, group
+
+            string preGroup = "0";
+
+            for (it = groupMap.begin(); it != groupMap.end(); it++) {
+                if ((it->first) > i) {
+                    //test code
+
+                    pairData = pair<string, string>(valueStr, preGroup);
+
+                    break;
+                }
+                preGroup = it->second;
+            }
+
+            out[keyStr] = pairData;
+        }
+    }
+}
 void search4(vector<string>& v, string& endStr, string& word)
 {
 
@@ -369,16 +412,20 @@ int main(int argc, char* argv[])
     fileRead(fin, readDataDisp);
     string word = DISP_ID_FIND;
 
-    map<string, string> mapHeaderID;
+    //    map<string, string> mapHeaderID;
+    //    mapHeaderID.clear();
+    //    search3_1(readDataDisp, word, mapHeaderID);
+
+    map<string, pair<string, string>> mapHeaderID;
     mapHeaderID.clear();
-    search3_1(readDataDisp, word, mapHeaderID);
+    search3_2(readDataDisp, word, mapHeaderID);
     cout << "map size : " << mapHeaderID.size() << endl;
 
-    map<string, string>::iterator i;
+    map<string, pair<string, string>>::iterator i;
 
-    //    for (i = mapHeaderID.begin(); i != mapHeaderID.end(); i++) {
-    //        cout << " key [" << i->first << "] value [" << i->second << "]" << endl;
-    //    }
+    for (i = mapHeaderID.begin(); i != mapHeaderID.end(); i++) {
+        cout << " key [" << i->first << "] value [" << i->second.first << "] value [" << i->second.second << "]" << endl;
+    }
     //    search3(readDataDisp, word);
 
     /////////////////////
