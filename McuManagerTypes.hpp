@@ -4973,25 +4973,25 @@ struct McuManagerTypes {
             eDispId_RENAME_BCW_Mirror_Fail = 225,
             eDispId_RENAME_DoorTrunkHood_Stopped_Open = 226,
             eDispId_RENAME_GroupTab = 227,
-            eDispId_RENAME_Mobis_Max = 228,
-            eDispId_RENAME_IVIS_Custom_Accessory = 512,
-            eDispId_RENAME_IVIS_Custom_PTG_Speed_Change_Fail = 513,
-            eDispId_RENAME_IVIS_Custom_Service_Interval_Setting = 514,
-            eDispId_RENAME_IVIS_Custom_Service_Interval_Save = 515,
-            eDispId_RENAME_IVIS_Custom_Service_Interval_Save_Complete = 516,
-            eDispId_RENAME_IVIS_Custom_USM_Reset_Save = 517,
-            eDispId_RENAME_IVIS_Custom_USM_Reset_Compolete = 518,
-            eDispId_RENAME_IVIS_Custom_USM_Help_Message = 519,
-            eDispId_RENAME_IVIS_Custom_USM_Voice_Guidance_Volume = 520,
-            eDispId_RENAME_IVIS_Custom_USM_Park_Assist_Volume = 521,
-            eDispId_RENAME_IVIS_Custom_USM_Service_Interval_reset = 522,
-            eDispId_RENAME_IVIS_Custom_USM_On_Driving = 523,
-            eDispId_RENAME_IVIS_Custom_USM_PowerTrunk_Activate = 524,
-            eDispId_RENAME_IVIS_Custom_USM_Service_Workshop = 525,
-            eDispId_RENAME_IVIS_Custom_PA_Tab_Info = 526,
-            eDispId_RENAME_IVIS_Custom_Digital_SpeedMeter = 527,
-            eDispId_RENAME_IVIS_Custom_Close_Popup = 528,
-            eDispId_RENAME_IVIS_Max = 529
+            eDispId_RENAME_Max = 228,
+            eDispId_RENAME_Custom_Accessory = 512,
+            eDispId_RENAME_Custom_PTG_Speed_Change_Fail = 513,
+            eDispId_RENAME_Custom_Service_Interval_Setting = 514,
+            eDispId_RENAME_Custom_Service_Interval_Save = 515,
+            eDispId_RENAME_Custom_Service_Interval_Save_Complete = 516,
+            eDispId_RENAME_Custom_USM_Reset_Save = 517,
+            eDispId_RENAME_Custom_USM_Reset_Compolete = 518,
+            eDispId_RENAME_Custom_USM_Help_Message = 519,
+            eDispId_RENAME_Custom_USM_Voice_Guidance_Volume = 520,
+            eDispId_RENAME_Custom_USM_Park_Assist_Volume = 521,
+            eDispId_RENAME_Custom_USM_Service_Interval_reset = 522,
+            eDispId_RENAME_Custom_USM_On_Driving = 523,
+            eDispId_RENAME_Custom_USM_PowerTrunk_Activate = 524,
+            eDispId_RENAME_Custom_USM_Service_Workshop = 525,
+            eDispId_RENAME_Custom_PA_Tab_Info = 526,
+            eDispId_RENAME_Custom_Digital_SpeedMeter = 527,
+            eDispId_RENAME_Custom_Close_Popup = 528,
+            eDispId_RENAME_Custom_Max = 529
         };
     
         EnumEventID()
@@ -5229,25 +5229,25 @@ struct McuManagerTypes {
                 case static_cast< int32_t>(Literal::eDispId_RENAME_BCW_Mirror_Fail):
                 case static_cast< int32_t>(Literal::eDispId_RENAME_DoorTrunkHood_Stopped_Open):
                 case static_cast< int32_t>(Literal::eDispId_RENAME_GroupTab):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_Mobis_Max):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_Accessory):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_PTG_Speed_Change_Fail):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_Service_Interval_Setting):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_Service_Interval_Save):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_Service_Interval_Save_Complete):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_USM_Reset_Save):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_USM_Reset_Compolete):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_USM_Help_Message):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_USM_Voice_Guidance_Volume):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_USM_Park_Assist_Volume):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_USM_Service_Interval_reset):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_USM_On_Driving):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_USM_PowerTrunk_Activate):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_USM_Service_Workshop):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_PA_Tab_Info):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_Digital_SpeedMeter):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Custom_Close_Popup):
-                case static_cast< int32_t>(Literal::eDispId_RENAME_IVIS_Max):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Max):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_Accessory):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_PTG_Speed_Change_Fail):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_Service_Interval_Setting):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_Service_Interval_Save):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_Service_Interval_Save_Complete):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_USM_Reset_Save):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_USM_Reset_Compolete):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_USM_Help_Message):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_USM_Voice_Guidance_Volume):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_USM_Park_Assist_Volume):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_USM_Service_Interval_reset):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_USM_On_Driving):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_USM_PowerTrunk_Activate):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_USM_Service_Workshop):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_PA_Tab_Info):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_Digital_SpeedMeter):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_Close_Popup):
+                case static_cast< int32_t>(Literal::eDispId_RENAME_Custom_Max):
                 return true;
             default:
                 return false;
