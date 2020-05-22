@@ -97,7 +97,7 @@ void search3(vector<string>& v, string& word)
 void search3_1(vector<string>& v, string& word, map<string, string>& out)
 {
 
-    cout << "serch word [" << word << "] << endl";
+    //    cout << "serch word [" << word << "] << endl";
     for (int i = 0; i < v.size(); i++) {
         int index = v[i].find(word);
         if (index != -1) {
@@ -113,13 +113,28 @@ void search3_1(vector<string>& v, string& word, map<string, string>& out)
             string keyStr = temp.substr(0, endPos);
             keyStr.erase(remove(keyStr.begin(), keyStr.end(), ' '), keyStr.end());
 
-            cout << "keyStr : " << keyStr << "valueStr : " << valueStr << endl;
+            //            cout << "keyStr : " << keyStr << "valueStr : " << valueStr << endl;
             out[keyStr] = valueStr;
         }
     }
 }
 
-void search4(vector<string>& v, string& endStr, string& word, map<string, string>& out)
+void search4(vector<string>& v, string& endStr, string& word)
+{
+
+    cout << "==== serch word [" << word << "] << endl";
+    for (int i = 0; i < v.size(); i++) {
+        int index = v[i].find(word);
+        if (index != -1) {
+            //            cout << "find text : " << v[i];
+            string temp = v[i].substr(word.length(), v[i].length() - word.length());
+            int endPos = temp.find(endStr);
+            cout << temp.substr(0, endPos) << endl;
+        }
+    }
+}
+
+void search4_1(vector<string>& v, string& endStr, string& word, map<string, string>& out)
 {
 
     cout << "==== serch word [" << word << "] << endl";
@@ -137,33 +152,83 @@ void search4(vector<string>& v, string& endStr, string& word, map<string, string
     }
 }
 
-void search4_1(vector<string>& v, string& endStr, string& word)
-{
-
-    cout << "==== serch word [" << word << "] << endl";
-    for (int i = 0; i < v.size(); i++) {
-        int index = v[i].find(word);
-        if (index != -1) {
-            //            cout << "find text : " << v[i];
-            string temp = v[i].substr(word.length(), v[i].length() - word.length());
-            int endPos = temp.find(endStr);
-            cout << temp.substr(0, endPos) << endl;
-        }
-    }
-}
-
 void search5(vector<string>& v, string& endStr, string& word, vector<string>& outV)
 {
 
-    cout << "==== serch word [" << word << "] << endl";
     for (int i = 0; i < v.size(); i++) {
         int index = v[i].find(word);
         if (index != -1) {
             //            cout << "find text : " << v[i];
             //            string temp = v[i].substr(word.length(), v[i].length() - word.length());
             string temp = v[i].substr(index, v[i].length() - index + word.length());
+
             int endPos = temp.find(endStr);
             outV.push_back(temp.substr(0, endPos));
+        }
+    }
+}
+
+void search6(vector<string>& v, string& endStr, string& word)
+{
+    // dldyddn : gotohome
+
+    cout << "==== serch word [" << word << "] << endl";
+    for (int i = 0; i < v.size(); i++) {
+        int index = v[i].find(word);
+        if (index != -1) {
+            cout << "find text : " << v[i] << endl;
+            string temp = v[i].substr(word.length(), v[i].length() - word.length());
+            int endPos = temp.find(endStr);
+            cout << "temp : " << temp << endl;
+
+            int valueIndex = v[i].find("eDispId_");
+            string valueStr = v[i].substr(valueIndex, v[i].length() - word.length());
+            valueStr.erase(remove(valueStr.begin(), valueStr.end(), ' '), valueStr.end());
+            cout << "valueStr : " << valueStr << endl;
+
+            string keyStr = temp.substr(0, endPos);
+            keyStr.erase(remove(keyStr.begin(), keyStr.end(), ' '), keyStr.end());
+            cout << "keyStr : " << keyStr << endl;
+        }
+    }
+}
+
+void search7(vector<string>& v, string& endStr, string& word)
+{
+    // dldyddn : gotohome
+
+    cout << "==== serch word [" << word << "] << endl";
+    for (int i = 0; i < v.size(); i++) {
+        int index = v[i].find(word);
+        if (index != -1) {
+
+            string tempR = v[i].substr(index, v[i].find(endStr));
+            cout << "rear rm text : " << tempR << endl;
+
+            int keyIndex = -1;
+            keyIndex = tempR.find(word);
+            string keyStr = tempR.substr(word.length(), tempR.length() - index);
+            cout << "keyStr : " << keyStr << endl;
+        }
+    }
+}
+
+void search8(vector<string>& v, string& endStr, string& word, map<string, string>& out)
+{
+
+    for (int i = 0; i < v.size(); i++) {
+        int index = v[i].find(word);
+        if (index != -1) {
+
+            string valueStr = v[i].substr(index, v[i].find(endStr));
+            //            cout << "rear rm text : " << valueStr << endl;
+
+            int keyIndex = -1;
+            keyIndex = valueStr.find(word);
+            string keyStr = valueStr.substr(word.length(), valueStr.length() - index);
+            //            cout << "keyStr : " << keyStr << endl;
+
+            out[keyStr] = valueStr;
         }
     }
 }
@@ -268,42 +333,51 @@ int main(int argc, char* argv[])
     /////////////////////
     /// \brief readData
     ///
+    cout << "==========READ  eDispId.hpp==========\n\n\n\n";
     vector<string> readDataDisp;
     ifstream fin(dispHeader.toStdString());
     fileRead(fin, readDataDisp);
     string word = DISP_ID_FIND;
-    cout << "enter word to search : " << word << endl;
 
-    map<string, string> testValue;
-    testValue.clear();
-#if define(LOG)
-    search3_1(readDataDisp, word, testValue);
-    cout << "map size : " << testValue.size() << endl;
+    map<string, string> mapHeaderID;
+    mapHeaderID.clear();
+    search3_1(readDataDisp, word, mapHeaderID);
+    cout << "map size : " << mapHeaderID.size() << endl;
 
     map<string, string>::iterator i;
 
-    for (i = testValue.begin(); i != testValue.end(); i++) {
+    for (i = mapHeaderID.begin(); i != mapHeaderID.end(); i++) {
         cout << " key [" << i->first << "] value [" << i->second << "]" << endl;
     }
     //    search3(readDataDisp, word);
-#endif
 
     /////////////////////
     // Read eDispId.h  //
     /////////////////////
     /// \brief readData
     ///
-    //    vector<string> readDataFidl;
-    //    ifstream finFidl(dispFidl.toStdString());
-    //    fileRead(finFidl, readDataFidl);
-    //    string wordFidl = FIDL_ID_FIND;
-    //    cout << "enter word to search : " << wordFidl << endl;
-    //    string endStr = " =";
-    //    //    search4(readDataFidl, endStr, wordFidl);
+    cout << "==========READ  fidl.hpp==========\n\n\n\n";
+    vector<string> readDataFidl;
+    ifstream finFidl(dispFidl.toStdString());
+    fileRead(finFidl, readDataFidl);
+    string wordFidl = FIDL_ID_FIND;
+    string endStr = " =";
+    //    search4(readDataFidl, endStr, wordFidl);
 
-    //    vector<string> test;
-    //    search5(readDataFidl, endStr, wordFidl, test);
+    vector<string> test;
+    search5(readDataFidl, endStr, wordFidl, test);
 
-    //    string endStr2 = ")";
-    //    search4(test, endStr2, wordFidl);
+    map<string, string> mapFidlID;
+    mapFidlID.clear();
+
+    string endStr2 = ")";
+    search8(test, endStr2, wordFidl, mapFidlID);
+
+    cout << "map size : " << mapFidlID.size() << endl;
+
+    map<string, string>::iterator it;
+
+    for (it = mapFidlID.begin(); it != mapFidlID.end(); it++) {
+        cout << " key [" << it->first << "] value [" << it->second << "]" << endl;
+    }
 }
