@@ -341,7 +341,7 @@ stDispID tableID[] = {\n");
         fprintf(fpSrc, "    {%s, %s, %s},\n", mobisIt->first.c_str(), mobisIt->second.first.c_str(), mobisIt->second.second.c_str());
     }
 
-    fprintf(fpSrc, "    {%s, %s, %s}\n", "", "", "");
+    fprintf(fpSrc, "    {%d, 999, 999}\n", 999);
     fprintf(fpSrc, "};\n\n");
     fprintf(fpSrc, "int size_table = sizeof(tableID) / sizeof(tableID[0]);\n\
 }\n\
