@@ -1,33 +1,22 @@
-//#include <QGuiApplication>
-//#include <QQmlApplicationEngine>
-
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QDebug>
 #include <QDirIterator>
-#include <QImage>
-#include <QOpenGLContext>
-#include <QOpenGLFunctions>
-#include <QOpenGLTexture>
-#include <QtEndian>
 #include <fcntl.h>
-#include <list>
-#include <qopengl.h>
 #include <stdio.h>
-#include <stdlib.h>"
+#include <stdlib.h>
 #include <zlib.h>
 
 #include <fstream>
-#include <iomanip>
 #include <iostream>
 #include <map>
 #include <string>
 #include <vector>
+
 #define DISP_ID_FIND "#define eDispId_"
 #define FIDL_ID_FIND "eDispId_RENAME_"
 #define FIDL_ID_FIND_CUSTOM "eDispId_RENAME_Custom_"
-
 #define GROUP_STR "/** Group"
 #define GROUP_STR_END " **/"
 #define GROUP_STR_FREFIX "McuServiceType::GroupLevel::eDispId_Group_"
@@ -35,27 +24,13 @@
 
 #define IS_LOG_ENABLE 0
 using namespace std;
-// ./DisplayGen -c DispStaruc.cpp  eDispId.h .fidl
+// ./DisplayGen -c DispStaruc.cpp  eDispId.h McuManagerTypes.fidl
 
 struct stDispID {
     int mobis_ID;
     int ivis_ID;
     int grou_label;
 };
-
-void ReadDispID()
-{
-    // eDispId.h 에서 데이터를 읽어 ListEntry로 반환
-}
-
-bool hasEnding(std::string const& fullString, std::string const& ending)
-{
-    if (fullString.length() >= ending.length()) {
-        return (0 == fullString.compare(fullString.length() - ending.length(), ending.length(), ending)); //fullString의 길이에서 ending의 길이만큼 뺀 위치부터 같은지 검사
-    } else { //fullString의 길이보다 ending의 길이가 긴 경우 -> 항상 거짓
-        return false;
-    }
-}
 
 void fileRead(ifstream& fin, vector<string>& v)
 {
@@ -69,7 +44,7 @@ void serarchGroup(vector<string>& v, map<int, string>& out)
 {
 
     map<int, string> groupMap; // line, groupName
-    for (int i = 0; i < v.size(); i++) {
+    for (unsigned long i = 0; i < v.size(); i++) {
         /////////////
         /// group ///
         /////////////
@@ -90,7 +65,7 @@ void serarchGroup(vector<string>& v, map<int, string>& out)
                 tempStr2.replace(replaceIndex, 1, "_");
             }
 
-            cout << "line [" << i << "] value [" << tempStr2 << "] " << endl;
+            //            cout << "line [" << i << "] value [" << tempStr2 << "] " << endl;
             out[i] = GROUP_STR_FREFIX + tempStr2;
         }
     }
@@ -101,7 +76,7 @@ void search3_2(vector<string>& v, string& word, map<string, pair<string, string>
     map<int, string> groupMap;
     serarchGroup(v, groupMap);
     //    cout << "serch word [" << word << "] << endl";
-    for (int i = 0; i < v.size(); i++) {
+    for (unsigned long i = 0; i < v.size(); i++) {
         int index = v[i].find(word);
         if (index != -1) {
             string temp = v[i].substr(word.length(), v[i].length() - word.length());
@@ -119,7 +94,6 @@ void search3_2(vector<string>& v, string& word, map<string, pair<string, string>
             //            cout << "keyStr : " << keyStr << "valueStr : " << valueStr << endl;
 
             map<int, string>::iterator it;
-            map<int, string>::reverse_iterator rIt = groupMap.rbegin();
 
             pair<string, string> pairData; //IVIS, group
 
@@ -150,7 +124,7 @@ void search3_2(vector<string>& v, string& word, map<string, pair<string, string>
 void search5(vector<string>& v, string& endStr, string& word, vector<string>& outV)
 {
 
-    for (int i = 0; i < v.size(); i++) {
+    for (unsigned long i = 0; i < v.size(); i++) {
 
         //////////////
         ///  text  ///
@@ -167,17 +141,14 @@ void search5(vector<string>& v, string& endStr, string& word, vector<string>& ou
 void search8(vector<string>& v, string& endStr, string& word, map<string, string>& out)
 {
 
-    for (int i = 0; i < v.size(); i++) {
+    for (unsigned long i = 0; i < v.size(); i++) {
         int index = v[i].find(word);
         if (index != -1) {
 
             string valueStr = v[i].substr(index, v[i].find(endStr));
             //            cout << "rear rm text : " << valueStr << endl;
-
-            int keyIndex = -1;
-            keyIndex = valueStr.find(word);
             string keyStr = valueStr.substr(word.length(), valueStr.length() - index);
-            cout << "keyStr : " << keyStr << endl;
+            //            cout << "keyStr : " << keyStr << endl;
 
             out[keyStr] = ENUM_STR_FREFIX + valueStr;
         }
@@ -193,8 +164,6 @@ int main(int argc, char* argv[])
     /// \return
     ///
     QCoreApplication app(argc, argv);
-    QStringList filter;
-    QImage b;
     QString outputFilePath("DisplayIDStructTable.cpp ");
     QString codeFilePath("image_rsc_io.cpp");
     QCommandLineParser parser;
@@ -291,9 +260,11 @@ int main(int argc, char* argv[])
     }
 #endif
 
+#if IS_LOG_ENABLE
     for (it = mapFidlIDCustom.begin(); it != mapFidlIDCustom.end(); it++) {
         cout << dispFidl.toStdString() << " - key [" << it->first << "] value [" << it->second << "]" << endl;
     }
+#endif
 
     ////////////////////
     /// data mapping ///
@@ -331,17 +302,20 @@ int main(int argc, char* argv[])
     QString path = QDir::currentPath();
     int rsc = open(outputFilePath.toLocal8Bit(), O_CREAT | O_RDWR | O_TRUNC, 0644);
     FILE* fpSrc = fopen(outputFilePath.toLocal8Bit(), "w+");
-    qint64 base = 0;
     fprintf(fpSrc, "#include \"DispIdStructTable.h\"\n\
 namespace cluster { \n\
 namespace dispID { \n\
 stDispID tableID[] = {\n");
 
     for (mobisIt = resultData.begin(); mobisIt != resultData.end(); ++mobisIt) {
-        fprintf(fpSrc, "    {%s, %s, %s},\n", mobisIt->first.c_str(), mobisIt->second.first.c_str(), mobisIt->second.second.c_str());
+        if (mobisIt != --resultData.end()) {
+            fprintf(fpSrc, "    {%s, %s, %s},\n", mobisIt->first.c_str(), mobisIt->second.first.c_str(), mobisIt->second.second.c_str());
+
+        } else {
+            fprintf(fpSrc, "    {%s, %s, %s}\n", mobisIt->first.c_str(), mobisIt->second.first.c_str(), mobisIt->second.second.c_str());
+        }
     }
 
-    fprintf(fpSrc, "    {%d, 999, 999}\n", 999);
     fprintf(fpSrc, "};\n\n");
     fprintf(fpSrc, "int size_table = sizeof(tableID) / sizeof(tableID[0]);\n\
 }\n\

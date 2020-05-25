@@ -831,46 +831,7 @@ main.o: main.cpp /opt/Qt/5.12.3/gcc_64/include/QtCore/QCommandLineOption \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qdir.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qfileinfo.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qfile.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qfiledevice.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/QImage \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qimage.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qtguiglobal.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qtgui-config.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qcolor.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qrgb.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qrgba64.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qpaintdevice.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qrect.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmargins.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsize.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qpixelformat.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qtransform.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qmatrix.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qpolygon.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qregion.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qdatastream.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qline.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qpainterpath.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/QOpenGLContext \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qopenglcontext.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/QObject \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/QScopedPointer \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/QSurfaceFormat \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qsurfaceformat.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qopengl.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qt_windows.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qopengles2ext.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qopenglext.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qopenglversionfunctions.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/QOpenGLFunctions \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qopenglfunctions.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/QOpenGLTexture \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qopengltexture.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/QtEndian \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qendian.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qfloat16.h
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qfiledevice.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 qrc_qml.o: qrc_qml.cpp 
